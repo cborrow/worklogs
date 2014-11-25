@@ -1,0 +1,20 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+body {
+	background: #fff;
+	width: 768px;
+	color: #333;
+	font-family: "Times New Roman", Serif;
+	font-size: 13pt;
+	padding: 10px;
+}
+h4 {
+	font-size: 17pt;
+	margin-bottom: 16px;
+	letter-spacing: -1px;
+}
+p {
+	line-height: 16px;
+}

@@ -1,0 +1,176 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+a {
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: underline;
+}
+body {
+	background: #dbe4e2;
+	color: #555;
+	font-family: "Segoe UI", Sans-Serif;
+	font-size: 12pt;
+}
+h1, h2, h3, h4, h5, h6 {
+	margin-bottom: 18px;
+}
+h1 { font-size: 22pt; }
+h2 { font-size: 20pt; }
+h3 { font-size: 18pt; }
+h4 { font-size: 16pt; }
+h5 { font-size: 14pt; }
+h6 { font-size: 12pt; }
+p {
+	margin-bottom: 18px;
+	line-height: 18px;
+}
+table thead tr td {
+	background: #4c6360;
+	color: #ddd;
+	font-weight: bold;
+}
+table * tr td {
+	padding: 2px;
+}
+table * tr:nth-child(even) td {
+	background: #becdcb;
+}
+form {
+	width: 80%;
+	max-width: 720px;
+}
+form select {
+	padding: 5px;
+	width: 200px;
+	color: #777;
+	font-family: "Segoe UI", Sans-Serif;
+	font-size: 12pt;
+}
+form input[type=text], form input[type=password] {
+	padding: 5px;
+	width: 74%;;
+	color: #777;
+	font-family: "Segoe UI", Sans-Serif;
+	font-size: 12pt;
+}
+form input[type=submit] {
+	padding: 5px;
+	font-family: "Segoe UI", Sans-Serif;
+	font-size: 12pt;
+}
+form label {
+	float: left;
+	width: 24%;
+}
+form textarea {
+	padding: 5px;
+	width: 75%;
+	height: 300px;
+	color: #777;
+	font-family: "Segoe UI", Sans-Serif;
+	font-size: 12pt;
+}
+form .buttons {
+	width: 80%;
+}
+form .buttons input {
+	float: right;
+	margin-right: 10px;
+}
+ul {
+	margin-bottom: 18px;
+}
+ul li {
+	list-style: none;
+	margin-left: 10px;
+	padding: 2px;
+}
+
+.container {
+	float: left;
+	width: 100%;
+	height: 100%;
+}
+.login {
+	float: left;
+	width: 60%;
+	max-width: 800px;
+	margin-left: 20%;
+	margin-top: 12.5%;
+}
+.nav {
+	float: left;
+	/*background: #ccccde;*/
+	background: #1c1a45;
+	color: #ccc;
+	width: 100%;
+	height: 28px;
+	padding-top: 5px;
+}
+.nav li {
+	list-style: none;
+	display: inline;
+	padding: 10px 15px;
+}
+.nav li a {
+	color: #ddd;
+}
+.nav li a:hover {
+	color: #fff;
+}
+.content {
+	float: left;
+	width: 98%;
+	height: auto;
+	padding: 1%;
+}
+
+.checkbox {
+	width: 30px;
+}
+.workorder {
+	width: 150px;
+	text-align: center;
+}
+.client {
+	width: 300px;
+}
+.notes {
+	width: 600px;
+	overflow: none;
+}
+
+.open {
+	background: firebrick !important;
+}
+.closed {
+	background: lightgreen !important;
+}
+
+.button {
+	background: #aab79a;
+	border: #aab79a solid 2px;
+	color: #000;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	padding: 5px;
+}
+.accept {
+	background: #369935;
+	border: #369935 solid 2px;
+	color: #fff;
+}
+.cancel {
+	background: #f03b39;
+	border: #f03b39 solid 2px;
+	color: #fff;
+}
+
+.right {
+	float: right;
+	margin-top: -10px;
+}

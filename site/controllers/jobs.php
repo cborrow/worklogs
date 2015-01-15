@@ -37,6 +37,7 @@ class Jobs extends AuthController {
 			$data['workorder'] = intval($_POST['workorder']);
 			$data['client'] = $_POST['client'];
 			$data['notes'] = $_POST['notes'];
+			$data['serial'] = $_POST['serial'];
 
 			$this->jobs->add($data);
 		}
@@ -64,6 +65,7 @@ class Jobs extends AuthController {
 			$data['workorder'] = intval($_POST['workorder']);
 			$data['client'] = $_POST['client'];
 			$data['notes'] = $_POST['notes'];
+			$data['serial'] = $_POST['serial'];
 
 			$this->jobs->edit($id, $data);
 		}
@@ -102,7 +104,7 @@ class Jobs extends AuthController {
 
 	public function view($id = null) {
 		$data = array();
-		
+
 		if(is_null($id) || empty($id)) {
 			$data['jobs'] = $this->jobs->getAllJobs();
 			View::render('jobs.viewall', $data);
@@ -111,6 +113,18 @@ class Jobs extends AuthController {
 			$data['job'] = $this->jobs->getJobById(intval($id));
 			View::render('jobs.view', $data);
 		}
+	}
+
+	public function open() {
+		$data = array();
+		$data['jobs'] = $this->jobs->getOpenJobs();
+		View::render('jobs.open', $data);
+	}
+
+	public function closed() {
+		$data = array();
+		$data['jobs'] = $this->jobs->getClosedJobs();
+		View::render('jobs.closed', $data);
 	}
 
 	public function printview($id = null) {

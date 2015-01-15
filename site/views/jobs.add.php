@@ -1,36 +1,46 @@
 <!doctype html>
 <html>
 <head>
-	<title>Work Logs</title>
-	<link rel="stylesheet" type="text/css" media="screen" href="<?php echo asset('main.css'); ?>" />
+    <title>Work Logs</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="<?php echo asset('style.css'); ?>" />
 </head>
 <body>
-	<div class="container">
-		<?php View::render('global.menu'); ?>
-		<div class="content">
-			<h4>Create new work log</h4>
-			<p>Enter your information below, a work order number from an already created work order out of quickbooks.<br />
-				The name of the client, then any notes you wish to add. Update the notes while working on the clients<br />
-				device.</p>
-			<form action="<?php echo uri('jobs/add_process'); ?>" method="post">
-			<p>
-				<label>Work Order Number</label>
-				<input type="text" name="workorder" placeholder="ex. 1234" />
-			</p>
-			<p>
-				<label>Client Name</label>
-				<input type="text" name="client" placeholder="ABC Company" />
-			</p>
-			<p>
-				<label>Notes</label>
-				<textarea name="notes"></textarea>
-			</p>
-			<p class="buttons">
-				<input class="button accept" type="submit" name="submit" value="Save" />
-				<input class="button" type="submit" name="submit" value="Cancel" />
-			</p>
-			</form>
-		</div>
-	</div>
+    <div class="container">
+        <div class="sidebar">
+            <h3>Work Logs</h3>
+            <ul class="nav_blocks">
+                <li><a href="<?php echo uri('/jobs/dashboard'); ?>"><img src="<?php echo asset('images/appbar.graph.bar.png'); ?>" title="Dashboard" /></a></li>
+                <li class="purpleback"><a href="<?php echo uri('/jobs/view'); ?>"><img src="<?php echo asset('images/appbar.list.png'); ?>" title="Jobs" /></a></li>
+                <li><a href="<?php echo uri('/users/view'); ?>"><img src="<?php echo asset('images/appbar.group.png'); ?>" title="Users" /></a></li>
+                <li><a href="<?php echo uri('/inventory/view'); ?>"><img src="<?php echo asset('images/appbar.store.png'); ?>" title="Inventory" /></a></li>
+                <li><a href="<?php echo uri('/settings'); ?>"><img src="<?php echo asset('images/appbar.cog.png'); ?>" title="Settings" /></a></li>
+            </ul>
+        </div>
+        <div class="content">
+            <div class="text_block"><span class="title purple">Adding a new job</span></div>
+            <form action="<?php echo uri('/jobs/add_process'); ?>" method="post">
+            <p>
+                <label>Client Name</label>
+                <input type="text" name="client" placeholder="John Doe" />
+            </p>
+            <p>
+                <label>Work Order</label>
+                <input type="text" name="workorder" placeholder="1234" />
+            </p>
+            <p>
+                <label>Device Serial</label>
+                <input type="text" name="serial" placeholder="0123456789ABCDEF" />
+            </p>
+            <p>
+                <label>Notes</label>
+                <textarea name="notes" placeholder="Work notes"></textarea>
+            </p>
+            <p class="buttons">
+                <input class="button purpleback" type="submit" name="submit" value="Save" />
+                <input class="button" type="submit" name="cancel" value="Cancel" />
+            </p>
+            </form>
+        </div>
+    </div>
 </body>
 </html>

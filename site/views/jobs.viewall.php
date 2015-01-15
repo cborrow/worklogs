@@ -1,49 +1,48 @@
 <!doctype html>
 <html>
 <head>
-	<title>Work Logs</title>
-	<link rel="stylesheet" type="text/css" media="screen" href="<?php echo asset('main.css'); ?>" />
+    <title>Work Logs</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="<?php echo asset('style.css'); ?>" />
 </head>
 <body>
-	<div class="container">
-		<?php View::render('global.menu'); ?>
-		<div class="content">
-			<form action="<?php echo uri('jobs/search'); ?>" method="post">
-			<p>
-				<input type="text" name="query" placeholder="Type a query and press search....to..search. Duh!" />
-				<input class="button" type="submit" name="submit" value="Search" />
-			</p>
-			</form>
-			<p>
-				<a class="button accept" href="<?php echo uri('/jobs/add'); ?>">Add Job</a>
-			</p>
-			<table cellspacing="0" cellpadding="0">
-				<thead>
-					<tr>
-						<!--<td class="checkbox"><input type="checkbox" name="selected" /></td>-->
-						<td class="checkbox">Status</td>
-						<td class="workorder">Work Order</td>
-						<td class="client">Client Name</td>
-						<td class="notes">Notes</td>
-						<td class="workorder">Commands</td>
-					</tr>
-				</thead>
-				<tbody>
-					<?php foreach($jobs as $job): ?>
-					<tr>
-						<td class="checkbox<?php echo " " . strtolower($job->status); ?>">&nbsp;</td>
-						<td class="workorder"><?php echo $job->workorder; ?></td>
-						<td class="client"><?php echo $job->client; ?></td>
-						<td class="notes"><?php echo ellipse_string($job->notes, 150); ?></td>
-						<td class="client"><a href="<?php echo uri('/jobs/view/' . $job->id); ?>">View</a> | <a href="<?php echo uri('/jobs/edit/' . $job->id); ?>">Edit</a> | <a href="<?php echo uri('/jobs/delete/' . $job->id); ?>">Delete</a>
-							<?php if($job->status == "Open"): ?>
-							| <a href="<?php echo uri('/jobs/complete/' . $job->id); ?>">Mark Complete</a>
-							<?php endif; ?></td>
-					</tr>
-					<?php endforeach; ?>
-				</tbody>
-			</table>
-		</div>
-	</div>
+    <div class="container">
+        <div class="sidebar">
+            <h3>Work Logs</h3>
+            <ul class="nav_blocks">
+                <li><a href="<?php echo uri('/jobs/dashboard'); ?>"><img src="<?php echo asset('images/appbar.graph.bar.png'); ?>" title="Dashboard" /></a></li>
+                <li class="purpleback"><a href="<?php echo uri('/jobs/view'); ?>"><img src="<?php echo asset('images/appbar.list.png'); ?>" title="Jobs" /></a></li>
+                <li><a href="<?php echo uri('/users/view'); ?>"><img src="<?php echo asset('images/appbar.group.png'); ?>" title="Users" /></a></li>
+                <li><a href="<?php echo uri('/inventory/view'); ?>"><img src="<?php echo asset('images/appbar.store.png'); ?>" title="Inventory" /></a></li>
+                <li><a href="<?php echo uri('/settings'); ?>"><img src="<?php echo asset('images/appbar.cog.png'); ?>" title="Settings" /></a></li>
+            </ul>
+        </div>
+        <div class="content">
+            <div class="text_block"><span class="title purple">All Jobs</span><a href="<?php echo uri('/jobs/open'); ?>"><img src="<?php echo asset('images/appbar.sort.png'); ?>" /></a></div>
+            <div>
+                <a href="<?php echo uri('/jobs/add'); ?>" class="button">Add a new job</a>
+            </div>
+            <form class="searchbox" action="<?php echo uri('/jobs/search'); ?>" method="post">
+            <p>
+                <input type="text" name="q" placeholder="Search Jobs" />
+            </p>
+            </form>
+            <div class="jobs">
+            <?php foreach($jobs as $job): ?>
+                <div class="job <?php echo strtolower($job->status); ?>">
+                    <h5 class="purple"><?php echo $job->client; ?> - Work Order # <?php echo $job->workorder; ?></h5>
+                    <p><?php echo ellipse_string($job->notes, 150); ?></p>
+                    <ul class="job_actions">
+                        <li><a href="<?php echo uri('/jobs/print/' . $job->id); ?>"><img src="<?php echo asset('images/appbar.printer.text.png'); ?>" /></a></li>
+                        <li><a href="<?php echo uri('/jobs/edit/' . $job->id); ?>"><img src="<?php echo asset('images/appbar.edit.png'); ?>" /></a></li>
+                        <li><a href="<?php echo uri('/jobs/delete/' . $job->id); ?>"><img src="<?php echo asset('images/appbar.delete.png'); ?>" /></a></li>
+                        <?php if(strtolower($job->status) == "open"): ?>
+                        <li><a href="<?php echo uri('/jobs/complete/' . $job->id); ?>"><img src="<?php echo asset('images/appbar.checkmark.png'); ?>" /></a></li>
+                        <?php endif; ?>
+                    </ul>
+                </div>
+            <?php endforeach; ?>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

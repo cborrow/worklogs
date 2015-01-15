@@ -3,7 +3,7 @@
 * Copyright (c) 2012 Cory Borrow
 *
 * This file add's a simple and effective way of accessing/querying a MySQL database
-* 
+*
 */
 class Database
 {
@@ -166,10 +166,6 @@ class Database
         self::$instance = $this;
     }
 
-    public function toggleDebugging() {
-        $this->EnableDebugging = !$this->EnableDebugging;
-    }
-
     /**
     * Connect's to mysql database
     * @access public
@@ -288,8 +284,18 @@ class Database
     public function orderBy($key, $dir = "desc")
     {
         $dir = strtoupper($dir);
-        $this->orderBy = "ORDER BY {$key}";
-        $this->orderBy .= ($dir == "DESC") ? " DESC " : " ASC ";
+        $dir = ($dir == "DESC") ? "DESC" : "ASC";
+
+        if(is_array($this->orderBy) && count($this->orderBy) > 0) {
+            $this->orderBy[] = ", {$key} {$dir}";
+        }
+        else {
+            $this->orderBy = array();
+            $this->orderBy[] = "ORDER BY {$key} {$dir}";
+        }
+
+        //$this->orderBy = "ORDER BY {$key}";
+        //$this->orderBy .= ($dir == "DESC") ? " DESC " : " ASC ";
         return $this;
     }
 
@@ -339,8 +345,13 @@ class Database
             $sql = $this->appendWhere($sql);
 
             $sql .= $this->groupBy;
-            $sql .= $this->orderBy;
-            $sql .= $this->limit;
+            //$sql .= $this->orderBy;
+
+            for($i = 0; $i < count($this->orderBy); $i++) {
+                $sql .= $this->orderBy[$i];
+            }
+
+            $sql .= " " .$this->limit;
 
             $this->query($sql);
         }

@@ -55,23 +55,24 @@ class JobsModel extends Model {
 	}
 
 	public function getAllJobs() {
-		$this->db->orderBy('id', 'desc')->select('jobs');
+		//$this->db->EnableDebugging = true;
+		$this->db->orderBy('status', 'desc')->orderBy('id', 'desc')->select('jobs');
 		$rows = $this->db->fetchAll();
 
 		return $rows;
 	}
-	
+
 	public function getAllJobsByOrder($field, $desending) {
 		if($field == null)
 			return;
 		if($desending == null)
 			$desending = true;
-		
+
 		if($desending)
 			$this->db->orderBy($field, 'desc');
 		else
 			$this->db->orderBy($field, 'asc');
-		
+
 		$rows = $this->db->fetchAll();
 		return $rows;
 	}

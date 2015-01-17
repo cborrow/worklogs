@@ -101,14 +101,14 @@ class Database
     /**
     * Database connection handle
     * @access protected
-    * @var resource
+    * @var object
     */
     protected $conn;
 
     /**
     * MySQL result handle
     * @access protected
-    * @var resource
+    * @var object
     */
     protected $result;
 
@@ -154,7 +154,7 @@ class Database
         $this->allowedOperators = array(
             "<", ">", "=", "!=", "<=", ">=", "<>", "LESS THAN",
             "MORE THAN", "EQUAL", "NOT EQUAL", "CONTAINS",
-            "NOT CONTAINS", "BEWTEEN", "NOT BEWTEEN", "STARTS WITH",
+            "NOT CONTAINS", "BETWEEN", "NOT BETWEEN", "STARTS WITH",
             "LIKE");
 
         $this->EnableDebugging = false;
@@ -174,10 +174,15 @@ class Database
     {
         if(!$this->conn)
         {
-            $this->conn = mysql_connect($this->Host, $this->User, $this->Pass);
+            $this->conn = mysqli_connect($this->Host, $this->User, $this->Pass, $this->Name);
 
-            if($this->conn)
-                mysql_select_db($this->Name, $this->conn);
+            if(mysqli_connect_errno()) {
+                $this->LastError = mysqli_connect_error();
+
+                if($this->LogErrors) {
+                    $this->logError(mysqli_connect_errno(), mysqli_connect_error());
+                }
+            }
         }
     }
 
@@ -190,7 +195,9 @@ class Database
     {
         if($this->conn && $this->result)
         {
-            return mysql_fetch_object($this->result);
+            $row =  mysqli_fetch_object($this->result);
+            //mysqli_free_result($this->result);
+            return $row;
         }
         return null;
     }
@@ -223,7 +230,7 @@ class Database
     {
         if($this->conn)
         {
-            return mysql_affected_rows($this->conn);
+            return mysqli_affected_rows($this->conn);
         }
     }
 
@@ -236,7 +243,7 @@ class Database
     {
         if($this->conn && $this->result)
         {
-            return mysql_num_rows($this->result);
+            return mysqli_num_rows($this->result);
         }
     }
 
@@ -252,7 +259,7 @@ class Database
     {
         if($this->conn && is_string($value))
         {
-            $value = mysql_real_escape_string($value, $this->conn);
+            $value = mysqli_real_escape_string($this->conn, $value);
         }
 
         $op = strtoupper($op);
@@ -432,7 +439,7 @@ class Database
     {
         if($this->conn)
         {
-            return mysql_insert_id($this->conn);
+            return mysqli_insert_id($this->conn);
         }
     }
 
@@ -446,8 +453,8 @@ class Database
         if($this->conn)
         {
             $this->LastQuery = $sql;
-            $this->result = mysql_query($sql, $this->conn);
-            $this->LastError = mysql_error($this->conn);
+            $this->result = mysqli_query($this->conn, $sql);
+            $this->LastError = mysqli_error($this->conn);
             $this->where = array();
             $this->orderBy = "";
             $this->groupBy = "";
@@ -463,9 +470,9 @@ class Database
             }
 
             if($this->LogErrors) {
-                if(mysql_errno($this->conn) > 0) {
-                    $errorCode = mysql_errno($this->conn);
-                    $errorStr = mysql_error($this->conn);
+                if(mysqli_errno($this->conn) > 0) {
+                    $errorCode = mysqli_errno($this->conn);
+                    $errorStr = mysqli_error($this->conn);
 
                     $this->logError($errorCode, $errorStr);
                 }
@@ -515,7 +522,7 @@ class Database
             for($i = 0; $i < count($arr); $i++)
             {
     			if(is_string($arr[$i]))
-    				$arr[$i] = mysql_real_escape_string($arr[$i]);
+    				$arr[$i] = mysqli_real_escape_string($this->conn, $arr[$i]);
             }
         }
         else {
@@ -523,7 +530,7 @@ class Database
 
             for($i = 0; $i < count($keys); $i++) {
                 if(is_string($arr[$keys[$i]]))
-                    $arr[$keys[$i]] = mysql_real_escape_string($arr[$keys[$i]]);
+                    $arr[$keys[$i]] = mysqli_real_escape_string($this->conn, $arr[$keys[$i]]);
             }
         }
         return $arr;

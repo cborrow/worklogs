@@ -6,7 +6,7 @@ class User {
 		/*self::$activeUser = (object)array('id' => 1, 'last_login' => 1001819110,
 			'username' => 'cory', 'password' => md5('network'), 'group' => 1,
 			'email' => 'cborrow03@gmail.com', 'display_name' => 'Cory Borrow');*/
-		
+
 		if(isset($_SESSION['active_user'])) {
 			$userId = $_SESSION['active_user'];
 			$update = $_SESSION['login_update_time'];
@@ -29,6 +29,10 @@ class User {
 		return self::$activeUser;
 	}
 
+	public static function setCurrentUser($userObj) {
+		self::$activeUser = $userObj;
+	}
+
 	public static function loginUser($username, $password) {
 		$u = new UsersModel();
 		$user = $u->getUserByUsername($username);
@@ -40,6 +44,19 @@ class User {
 			return true;
 		}
 		return false;
+	}
+
+	public static function getAllUsers() {
+		$u = new UsersModel();
+		$users = $u->getAllUsers();
+
+		return $users;
+	}
+
+	public static function getUserByName($displayName) {
+		$u = new UsersModel();
+		$user = $u->getUserByName($displayName);
+		return $user;
 	}
 }
 ?>

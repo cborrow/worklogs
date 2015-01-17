@@ -11,7 +11,7 @@ class UsersModel extends Model {
 		$data['created'] = time();
 		$data['last_login'] = time();
 		$data['user_level'] = 1;
-		
+
 		$this->db->insert('users', $data);
 	}
 
@@ -25,15 +25,15 @@ class UsersModel extends Model {
 	public function delete($id) {
 		$this->db->where('id', $id)->delete('users');
 	}
-	
+
 	public function getAllUsers() {
 		$user = User::getCurrentUser();
-		
-		if($user == null)
+
+		/*if($user == null)
 			return null;
 		if($user->user_level != 10)
-			return null;
-		
+			return null;*/
+
 		$this->db->orderBy('id')->select('users');
 		return $this->db->fetchAll();
 	}
@@ -51,6 +51,14 @@ class UsersModel extends Model {
 			throw new Exception("Null argument given.");
 
 		$this->db->where('username', $username)->limit(1)->select('users');
+		return $this->db->fetch();
+	}
+
+	public function getUserByName($displayName) {
+		if($displayName == null)
+			throw new Exception("Null argument given.");
+
+		$this->db->where('display_name', $displayName)->limit(1)->select('users');
 		return $this->db->fetch();
 	}
 }

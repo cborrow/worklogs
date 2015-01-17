@@ -1,11 +1,15 @@
 <!doctype html>
 <html>
 <head>
-    <title>Work Logs</title>
+    <title>Work Logs > Closed Jobs</title>
     <link rel="stylesheet" type="text/css" media="screen" href="<?php echo asset('style.css'); ?>" />
 </head>
 <body>
     <div class="container">
+        <div class="userinfo">
+            <?php echo User::getCurrentUser()->display_name; ?>
+            <a href="<?php echo uri('/users/logout'); ?>">Logout</a>
+        </div>
         <div class="sidebar">
             <h3>Work Logs</h3>
             <ul class="nav_blocks">

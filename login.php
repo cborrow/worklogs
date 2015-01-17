@@ -1,40 +1,74 @@
 <?php session_start(); ?>
 <?php
-require_once "core/config.php";
-require_once "siteconfig.php";
-require_once "site/helpers/uri.php";
+require_once "./core/database.php";
+require_once "./core/config.php";
+require_once "./siteconfig.php";
+require_once "./site/helpers/uri.php";
+require_once "./core/model.php";
+require_once "./site/models/usersmodel.php";
 ?>
 <!doctype html>
 <html>
 <head>
-	<title>WorkLogs - Login</title>
-	<link rel="stylesheet" type="text/css" media="screen" href="<?php echo asset('main.css'); ?>" />
+    <title>Work Logs > Login</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="<?php echo asset('style.css'); ?>" />
+    <style type="text/css">
+        body {
+            background: #5938AF !important;
+            color: #fff;
+        }
+        .container form {
+            margin-left: 50px;
+            margin-top: 200px;
+        }
+        .userselect {
+            background: #28AFDF;
+            color: #fff;
+        }
+        .userselect option {
+            background: #28AFDF;
+            color: #fff;
+            padding: 10px 20px;
+        }
+        form input[type=password] {
+            width: 480px;
+            padding: 10px 20px;
+        }
+        form input[type=submit] {
+            background: #28AFDF;
+            color: #fff;
+            font-weight: bold;
+            margin-right: 160px;
+            padding: 10px 20px;
+            border: none;
+        }
+    </style>
 </head>
 <body>
-	<div class="login">
-		<h4>WorkLogs Login</h4>
-		<p>This site requires that you login before you can be given access. If you do not have a login, you may contact your system admin to request one.</p>
-		<?php if(isset($_GET['error'])): ?>
-			<?php
-				$error = $_GET['error'];
-
-				if($error == 1): ?>
-			<p class="cancel">The username and / or password you used was incorrect, please try again or contact your system admin.</p>
-			<?php endif; ?>
-		<?php endif; ?>
-		<form action="<?php echo uri('users/processLogin'); ?>" method="post">
-		<p>
-			<label>Username</label>
-			<input type="text" name="username" placeholder="Your username" />
-		</p>
-		<p>
-			<label>Password</label>
-			<input type="password" name="password" placeholder="Your password" />
-		</p>
-		<p class="buttons">
-			<input class="button" type="submit" name="submit" value="Login" />
-		</p>
-		</form>
-	</div>
+    <div class="container">
+        <form action="processLogin.php" method="post">
+        <h5>WorkLogs Login</h5>
+        <p>This site requires a valid login, if you do not posses one you may contact your system administrator to request one.</p>
+        <p>
+            <?php
+            $db = Database::getInstance();
+            $db->orderBy('username', 'asc')->select('users');
+            $users = $db->fetchAll();
+            ?>
+            <select name="username" class="userselect">
+                <option selected="selected">Please select your account</option>
+                <?php foreach($users as $user): ?>
+                <option><?php echo $user->display_name; ?></option>
+                <?php endforeach; ?>
+            </select>
+        </p>
+        <p>
+            <input type="password" name="password" placeholder="Enter your password" />
+        </p>
+        <p class="buttons">
+            <input type="submit" name="submit" value="Login" />
+        </p>
+        </form>
+    </div>
 </body>
 </html>

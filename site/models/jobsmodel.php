@@ -30,7 +30,7 @@ class JobsModel extends Model {
 		$row = $this->db->fetch();
 
 		$base = Config::get('application.paths.base');
-		$file = $base . "site\\backups\\workorder_{$row->workorder}.backup";
+		$file = realpath($base . "site\\backups\\workorder_{$row->workorder}.backup");
 
 		$fp = fopen($file, 'x');
 		flock($fp, LOCK_EX);

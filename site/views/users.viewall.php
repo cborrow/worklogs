@@ -1,45 +1,56 @@
 <!doctype html>
 <html>
 <head>
-	<title>Work Logs</title>
-	<link rel="stylesheet" type="text/css" media="screen" href="<?php echo asset('main.css'); ?>" />
+    <title>Work Logs > All Jobs</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="<?php echo asset('style.css'); ?>" />
 </head>
 <body>
-	<div class="container">
-		<?php View::render('global.menu'); ?>
-		<div class="content">
-			<!--<form action="<?php echo uri('jobs/search'); ?>" method="post">
-			<p>
-				<input type="text" name="query" placeholder="Type a query and press search....to..search. Duh!" />
-				<input class="button" type="submit" name="submit" value="Search" />
-			</p>
-			</form>-->
-			<p>
-				<a class="button accept" href="<?php echo uri('/users/add'); ?>">Add User</a>
-			</p>
-			<table cellspacing="0" cellpadding="0">
-				<thead>
-					<tr>
-						<td class="checkbox">User Level</td>
-						<td class="workorder">Username</td>
-						<td class="client">Display Name</td>
-						<td class="notes">Email Address</td>
-						<td class="workorder">Commands</td>
-					</tr>
-				</thead>
-				<tbody>
-					<?php foreach($users as $u): ?>
-					<tr>
-						<td class="checkbox"><?php echo $u->user_level; ?></td>
-						<td class="workorder"><?php echo $u->username; ?></td>
-						<td class="client"><?php echo $u->display_name; ?></td>
-						<td class="notes"><?php echo $u->email; ?></td>
-						<td class="client"><a href="<?php echo uri('/users/edit/' . $u->id); ?>">Edit</a> | <a href="<?php echo uri('/users/delete/' . $u->id); ?>">Delete</a>
-					</tr>
-					<?php endforeach; ?>
-				</tbody>
-			</table>
-		</div>
-	</div>
+    <div class="container">
+        <div class="userinfo">
+            <?php echo User::getCurrentUser()->display_name; ?>
+            <a href="<?php echo uri('/users/logout'); ?>">Logout</a>
+        </div>
+        <div class="sidebar">
+            <h3>Work Logs</h3>
+            <ul class="nav_blocks">
+                <li><a href="<?php echo uri('/jobs/dashboard'); ?>"><img src="<?php echo asset('images/appbar.graph.bar.png'); ?>" title="Dashboard" /></a></li>
+                <li><a href="<?php echo uri('/jobs/view'); ?>"><img src="<?php echo asset('images/appbar.list.png'); ?>" title="Jobs" /></a></li>
+                <li class="pinkback"><a href="<?php echo uri('/users/view'); ?>"><img src="<?php echo asset('images/appbar.group.png'); ?>" title="Users" /></a></li>
+                <li><a href="<?php echo uri('/inventory/view'); ?>"><img src="<?php echo asset('images/appbar.store.png'); ?>" title="Inventory" /></a></li>
+                <li><a href="<?php echo uri('/settings'); ?>"><img src="<?php echo asset('images/appbar.cog.png'); ?>" title="Settings" /></a></li>
+            </ul>
+        </div>
+        <div class="content">
+            <div class="text_block"><span class="title pink">All Users</span></div>
+            <div>
+                <a href="<?php echo uri('/users/add'); ?>" class="button">Add a new user</a>
+            </div>
+            <form class="searchbox" action="<?php echo uri('/jobs/search'); ?>" method="post">
+            <p>
+                <input type="text" name="q" placeholder="Search Users" />
+            </p>
+            </form>
+            <div class="jobs">
+            <?php foreach($users as $user): ?>
+                <div class="job <?php echo strtolower($job->status); ?>">
+                    <h5 class="pink"><?php echo $user->display_name; ?></h5>
+                    <p>
+                    	Username : <?php echo $user->username; ?><br />
+                    	Email : <?php echo $user->email; ?><br />
+                    	Level : <?php echo $user->user_level; ?>
+                    	<?php if ($user->user_level == 10):?>
+                    		<a href="<?php echo uri('/users/demote/' . $user->id); ?>">Demote User</a>
+                    	<?php endif; ?>
+                    </p>
+                    <ul class="job_actions">
+                        <li><a href="<?php echo uri('/users/edit/' . $user->id); ?>"><img src="<?php echo asset('images/appbar.edit.png'); ?>" /></a></li>
+                        <li><a href="<?php echo uri('/users/delete/' . $user->id); ?>"><img src="<?php echo asset('images/appbar.delete.png'); ?>" /></a></li>
+                        <li><a href="<?php echo uri('/users/reset/' . $user->id); ?>"><img src="<?php echo asset('images/appbar.checkmark.png'); ?>" /></a></li>
+                    </ul>
+                </div>
+            <?php endforeach; ?>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

@@ -1,49 +1,57 @@
 <!doctype html>
 <html>
 <head>
-	<title>Work Logs</title>
-	<link rel="stylesheet" type="text/css" media="screen" href="<?php echo asset('main.css'); ?>" />
+    <title>Work Logs > All Jobs</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="<?php echo asset('style.css'); ?>" />
 </head>
 <body>
-	<div class="container">
-		<?php View::render('global.menu'); ?>
-		<div class="content">
-			<h4>Create a new user</h4>
-			<p>Please ensure that all fields are properly filled out.</p>
-			<form action="<?php echo uri('users/add_process'); ?>" method="post">
-			<?php if($error != null): ?>
-			<p class="button cancel">
-				<?php if($error == "nomatch"): ?>
-				The passwords you entered did not match, please try again.
-				<?php endif; ?>
-			</p>
-			<?php endif; ?>
-			<p>
-				<label>Username</label>
-				<input type="text" name="username" placeholder="john" />
-			</p>
-			<p>
-				<label>Password</label>
-				<input type="password" name="password" placeholder="Please enter a strong password." />
-			</p>
-			<p>
-				<label>Confirm Password</label>
-				<input type="password" name="cpassword" placeholder="Confirm what should be a strong password." />
-			</p>
-			<p>
-				<label>Display Name</label>
-				<input type="text" name="display_name" placeholder="John Doe" />
-			</p>
-			<p>
-				<label>Email Address</label>
-				<input type="text" name="email" placeholder="john@missing.com" />
-			</p>
-			<p class="buttons">
-				<input class="button accept" type="submit" name="submit" value="Save" />
-				<input class="button" type="submit" name="submit" value="Cancel" />
-			</p>
-			</form>
-		</div>
-	</div>
+    <div class="container">
+        <div class="userinfo">
+            <?php echo User::getCurrentUser()->display_name; ?>
+            <a href="<?php echo uri('/users/logout'); ?>">Logout</a>
+        </div>
+        <div class="sidebar">
+            <h3>Work Logs</h3>
+            <ul class="nav_blocks">
+                <li><a href="<?php echo uri('/jobs/dashboard'); ?>"><img src="<?php echo asset('images/appbar.graph.bar.png'); ?>" title="Dashboard" /></a></li>
+                <li><a href="<?php echo uri('/jobs/view'); ?>"><img src="<?php echo asset('images/appbar.list.png'); ?>" title="Jobs" /></a></li>
+                <li class="pinkback"><a href="<?php echo uri('/users/view'); ?>"><img src="<?php echo asset('images/appbar.group.png'); ?>" title="Users" /></a></li>
+                <li><a href="<?php echo uri('/inventory/view'); ?>"><img src="<?php echo asset('images/appbar.store.png'); ?>" title="Inventory" /></a></li>
+                <li><a href="<?php echo uri('/settings'); ?>"><img src="<?php echo asset('images/appbar.cog.png'); ?>" title="Settings" /></a></li>
+            </ul>
+        </div>
+        <div class="content">
+            <div class="text_block"><span class="title pink">All Users</span></div>
+            <form action="<?php echo uri('/users/add_process'); ?>" method="post">
+            <p>
+            	<label>User Level</label>
+            	<input type="text" name="user_level" placeholder="User's Acces Level (1 - 10)" />
+            </p>
+            <p>
+            	<label>Display Name</label>
+            	<input type="text" name="display_name" placeholder="Full Name Here" />
+            </p>
+            <p>
+            	<label>Username</label>
+            	<input type="text" name="username" placeholder="Login name" />
+            </p>
+            <p>
+            	<label>Password</label>
+            	<input type="password" name="password" placeholder="Enter password" />
+            </p>
+            <p>
+            	<label>Confirm Password</label>
+            	<input type="password" name="cpassword" placeholder="Confirm password" />
+            <p>
+            	<label>Email</label>
+            	<input type="text" name="email" placeholder="user@yourdomain.com" />
+            </p>
+            <p class="buttons">
+            	<input class="button pinkback" type="submit" name="submit" value="Save" />
+            	<input class="button" type="submit" name="cancel" value="Cancel" />
+            </p>
+            </form>
+        </div>
+    </div>
 </body>
 </html>

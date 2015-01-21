@@ -13,22 +13,22 @@ require_once "./site/models/usersmodel.php";
     <title>Work Logs > Login</title>
     <link rel="stylesheet" type="text/css" media="screen" href="<?php echo asset('style.css'); ?>" />
     <style type="text/css">
-        body {
-            background: #5938AF !important;
-            color: #fff;
-        }
         .container form {
             margin-left: 50px;
             margin-top: 200px;
         }
         .userselect {
-            background: #28AFDF;
-            color: #fff;
+            background: #fff;
+            color: #333;
+            border: #999 solid 1px;
+            padding: 10px 15px !important;
+        }
+        select:hover {
+            border: #7EB4EA solid 1px;
         }
         .userselect option {
-            background: #28AFDF;
-            color: #fff;
-            padding: 10px 20px;
+            color: #555;
+            padding: 0px 20px;
         }
         form input[type=password] {
             width: 480px;

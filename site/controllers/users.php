@@ -39,6 +39,7 @@ class Users extends AuthController {
 			$data['password'] = $password;
 			$data['email'] = $email;
 			$data['display_name'] = $display;
+			$data['user_level'] = intval($_POST['user_level']);
 
 			$this->users->add($data);
 		}
@@ -64,8 +65,7 @@ class Users extends AuthController {
 			$data['email'] = $_POST['email'];
 			$data['display_name'] = $_POST['display_name'];
 
-			if(isset($_POST['password']) && strlen($_POST['password']) >= 5
-				&& $_POST['password'] == $_POST['cpassword'])
+			if(isset($_POST['password']) && strlen($_POST['password']) >= 5)
 				$data['password'] = $_POST['password'];
 
 			$this->users->edit($id, $data);

@@ -8,6 +8,7 @@ class Jobs extends CI_Controller {
         $this->load->helper('status');
         $this->load->helper('store');
         $this->load->helper('user');
+        $this->load->helper('asset');
         user_login_check();
 
         $this->load->model('Jobs_model', 'jobs');

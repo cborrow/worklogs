@@ -2,7 +2,7 @@
 <html>
 <head>
     <title><?=$title; ?> - WorkLogs</title>
-    <link rel="stylesheet" type="text/css" media="screen" href="http://localhost/worklogs3/assets/default.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="<?=asset('default.css'); ?>" />
 </head>
 <body>
     <div class="container">
@@ -22,7 +22,7 @@
         <div class="content">
             <h1><?=$title; ?></h1>
             <?php if(count($pastDueJobs) > 0): ?>
-            <h3 class="subdue">The following jobs have been open for more than 5 days and need attention.</h3>
+            <h3 class="subdue_red">The following jobs have been open for more than 5 days and need attention.</h3>
             <table cellpadding="0" cellspacing="0">
                 <thead>
                     <tr>

@@ -2,7 +2,7 @@
 <html>
 <head>
     <title><?=$title; ?> - WorkLogs</title>
-    <link rel="stylesheet" type="text/css" media="screen" href="http://localhost/worklogs3/assets/print.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="<?=asset('print.css'); ?>" />
 </head>
 <body>
     <div class="container">

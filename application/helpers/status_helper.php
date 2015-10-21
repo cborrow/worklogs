@@ -33,4 +33,11 @@ if(!function_exists('status_add')) {
         $db->query("INSERT INTO status (name) VALUES ('{$name}')");
     }
 }
+if(!function_exists('status_delete')) {
+    function status_delete($name) {
+        $db = new SQLite3('Worklogs.db');
+        $name = $db->escapeString($name);
+        $db->query("DELETE FROM status WHERE name='{$name}'");
+    }
+}
 ?>

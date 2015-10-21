@@ -6,6 +6,9 @@ class Settings extends CI_Controller {
         $this->load->helper('url');
         $this->load->helper('status');
         $this->load->helper('store');
+        $this->load->helper('asset');
+
+        $this->load->model('Jobs_model', 'jobs');
     }
 
     public function index() {
@@ -25,6 +28,22 @@ class Settings extends CI_Controller {
             }
         }
         redirect('settings');
+    }
+
+    public function deletestore($id = null) {
+        if($id == null || !is_numeric($id) || $id == 0 || $id == 1)
+            redirect('/settings');
+
+        $this->jobs->moveJobsByStore($id, 1);
+        store_delete($id);
+    }
+
+    public function deletestatus($id = null) {
+        if($id == null || !is_numeric($id) || $id == 0 || $id == 1)
+            redirect('/settings');
+
+        $this->jobs->moveJobsByStatus($id, 2);
+        status_delete($id);
     }
 }
 ?>

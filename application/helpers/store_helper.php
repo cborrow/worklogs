@@ -51,4 +51,11 @@ if(!function_exists('store_add')) {
         $db->query("INSERT INTO stores (created, name) VALUES ('{$time}', '{$name}')");
     }
 }
+if(!function_exists('store_delete')) {
+    function store_delete($name) {
+        $db = new SQLite3('Worklogs.db');
+        $name = $db->escapeString($name);
+        $db->query("DELETE FROM stores WHERE name='{$name}'");
+    }
+}
 ?>

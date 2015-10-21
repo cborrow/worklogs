@@ -100,6 +100,14 @@ class Jobs_model extends CI_Model {
         $this->db->where('id', $id)->update('jobs', array('modified' => time(), 'status_id' => '1'));
     }
 
+    public function moveJobsByStore($oldStore, $newStore) {
+        $this->db->where('store_id', $oldStore)->update('jobs', array('store_id', $newStore));
+    }
+
+    public function moveJobsByStatus($old, $new) {
+        $this->db->where('status_id', $old)->update('jobs', array('status_id', $new));
+    }
+
     protected function getStore() {
         if(isset($_SESSION['active_store_id']))
             $store = $_SESSION['active_store_id'];

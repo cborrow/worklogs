@@ -7,7 +7,6 @@ class Dashboard extends CI_Controller {
         $this->load->helper('url');
         $this->load->helper('status');
         $this->load->helper('store');
-        $this->load->helper('asset');
 
         $this->load->model('Jobs_model', 'jobs');
     }

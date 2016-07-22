@@ -27,6 +27,10 @@ class Job extends Model
 
         if($status != null)
             return $status->color;
-        return "transparent";
+        return "#fff";
+    }
+
+    public static function recentlyUpdated($count) {
+        return Job::orderBy('updated_at')->take($count)->get();
     }
 }

@@ -14,7 +14,7 @@ a:hover {
 body {
     background: #ecf0f1;
     color: #2c3e50;
-    font-family: "Segoe UI", Sans-Serif;
+    font-family: "Open Sans", Sans-Serif;
     font-size: 12pt;
 }
 table {
@@ -47,22 +47,22 @@ form label {
 }
 select, option, input[type=text], input[type=password], textarea, input[type=checkbox] {
     padding: 5px;
-    font-family: "Segoe UI", Sans-Serif;
+    font-family: "Open Sans", Sans-Serif;
     font-size: 12pt;
     border: #ccc solid 1px;
 }
 
 form select, input, textarea {
-    font-family: "Segoe UI", Sans-Serif;
+    font-family: "Open Sans", Sans-Serif;
     font-size: 12pt;
 }
-form .small-input {
+.small-input {
     width: 200px;
 }
-form .medium-input {
+.medium-input {
     width: 400px;
 }
-form .large-input {
+.large-input {
     width: 650px;
 }
 form p:nth-child(odd) label {
@@ -94,6 +94,9 @@ textarea.large-input {
 input[type=checkbox] {
     margin-left: 5px;
     margin-top: 15px;
+}
+ul li {
+    list-style: none;
 }
 
 #topbar {
@@ -174,10 +177,23 @@ input[type=checkbox] {
 h4.title {
     font-size: 20pt;
 }
+.large-numbers {
+    font-size: 20pt;
+}
 
 .semi-bold {
     font-size: 12pt;
     font-weight: 600;
+}
+
+.floating-box-25 {
+    box-sizing: border-box;
+    float: left;
+    background: #fff;
+    width: 25%;
+    margin: 2.5%;
+    padding: 10px;
+    box-shadow: 0px 0px 6px 2px rgba(194,194,194,1);
 }
 
 .floating-box-95 {
@@ -216,15 +232,46 @@ h4.title {
     cursor: pointer;
     text-decoration: none;
 }
+.button:hover {
+    /*box-shadow: inset 0px 0px 10px 3px rgba(100,100,100,0.65);*/
+    box-shadow: 0px 0px 5px 2px rgba(100,100,100,0.35);
+}
 .normal {
     background: #2980b9;
     border: #2980b9 solid 1px;
     color: #ecf0f1;
 }
+.success {
+    background-color: #27ae60;
+    border: #27ae60 solid 1px;
+    color: #ecf0f1;
+}
+.info {
+    background-color: lightblue;
+    border: lightblue solid 1px;
+    color: #ecf0f1;
+}
+.warning {
+    background-color: orange;
+    border: orange solid 1pxl
+    color: #ecf0f1;
+}
+.danger {
+    background-color: red;
+    border: red solid 1px;
+    color: #ecf0f1;
+}
+#create-button {
+    margin-right: 25px;
+}
 
 .right {
     float: right;
     display: block;
+}
+.text-right {
+    float: right;
+    text-align: right;
 }
 
 .fa-key {
@@ -241,13 +288,14 @@ h4.title {
 }
 
 .status {
+    background: #95a5a6;
     padding: 2px 5px;
     border-radius: 5px;
     font-weight: 600;
 }
 .status a {
     text-decoration: none;
-    color: #555;
+    color: #fff;
 }
 .in-progress { background: #27ae60; color: #eee; }
 .in-progress a { color: #eee; }
@@ -288,7 +336,7 @@ h4.title {
 .popup-close {
     float: right;
     color: #555;
-    width: 96%;
+    width: 28px;
     text-align: right;
     font-size: 24px;
     line-height: 1.5em;

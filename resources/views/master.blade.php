@@ -2,10 +2,12 @@
 <html>
 <head>
     <title>Notes</title>
-    <link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" media="screen" href="<?=asset('/css/main.css'); ?>" />
     <script src="https://use.fontawesome.com/c584962945.js"></script>
-    <script   src="https://code.jquery.com/jquery-2.2.4.min.js"   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>
-    <script src="/js/main.js"></script>
+    <script   src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>
+    <script src="<?=asset('/js/main.js'); ?>"></script>
+    <meta name="csrf-token" content="{{ csrf_token() }}"
 </head>
 <body>
     <div class="container col-100">
@@ -17,12 +19,7 @@
             <ul class="vnav">
                 <li>BASIC</li>
                 <li><a href="/dashboard">Dashboard</a></li>
-                <li><a href="/">Jobs</a> <span class="count">2</span>
-                    <ul>
-                        <li><a href="/add">Create Job</a></li>
-                        <li><a href="#">Search Jobs</a></li>
-                    </ul>
-                </li>
+                <li><a href="/">Jobs</a> <span class="count">2</span></li>
                 <li><a href="#">Documents</a></li>
                 <li>ADMINISTRATION</li>
                 <li><a href="/users">Users</a></li>
@@ -33,9 +30,7 @@
             <div class="container col-95 pad-25p no-bottom-pad">
                 @yield('header')
             </div>
-            <div class="container floating-box-95 no-top-pad">
-                @yield('content')
-            </div>
+            @yield('content')
         </div>
     </div>
     <div class="popup-overlay">

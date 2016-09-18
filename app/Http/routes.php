@@ -23,6 +23,9 @@ Route::post('/add', 'JobsController@store');
 Route::post('/edit/{job}', 'JobsController@update');
 Route::post('/delete', 'JobsController@purge');
 
+Route::get('/jobs/status/{status}', 'JobsController@jobsByStatus');
+Route::get('/jobs/page/{page}', 'JobsController@jobsByPage');
+
 Route::get('/api/getjobstatus/{job}', 'JobsController@apigetstatus');
 Route::get('/api/getstatuslist', 'JobsController@getstatuslist');
 Route::post('/api/setjobstatus/{job}', 'JobsController@setjobstatus');

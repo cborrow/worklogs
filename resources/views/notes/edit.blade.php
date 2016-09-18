@@ -13,7 +13,7 @@
         @endforeach
         </ul>
     @endif
-    <form action="/edit/{{ $job->id }}" method="post">
+    <form action="{{ url('/edit/' . $job->id) }}" method="post">
     {{ csrf_field() }}
     <p>
         <label>Workorder</label>
@@ -30,20 +30,23 @@
     <p>
         <label>Status</label>
         <select class="medium-input" name="status">
-            <option>In Progress</option>
-            <option>Parts Ordered</option>
-            <option>Waiting on Callback</option>
-            <option>Waiting on Pickup</option>
+            @foreach($statuses as $status)
+            @if($job->status_id == $status->id)
+                <option value="{{ $status->id }}" selected="selected">{{ $status->name }}</option>
+            @else
+                <option value="{{ $status->id }}">{{ $status->name }}</option>
+            @endif
+            @endforeach
         </select>
     </p>
-    <p>
+    <!--<p>
         <label>Store</label>
         <select class="medium-input" name="store">
             <option>Store #001</option>
             <option>Store #002</option>
             <option>Store #003</option>
         </select>
-    </p>
+    </p>-->
     <p>
         <label>Device</label>
         <input class="medium-input" type="text" name="device" value="{{ $job->device }}" />

@@ -7,20 +7,30 @@
     <script src="https://use.fontawesome.com/c584962945.js"></script>
     <script   src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>
     <script src="<?=asset('/js/main.js'); ?>"></script>
-    <meta name="csrf-token" content="{{ csrf_token() }}"
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
 </head>
 <body>
     <div class="container col-100">
         <div class="container col-100" id="topbar">
             <span class="title">Worklogs</span>
-            <span class="right"><span class="blue-subdue">Hello Cory</span> <a href="#">My Profile</a> | <a href="#">Logout</a></span>
+            <span class="right">
+                <!--<span class="blue-subdue">Hello Cory</span> <a href="#">My Profile</a> | <a href="#">Logout</a>-->
+                {{ date("D j, M Y h:i A") }}
+            </span>
         </div>
         <div class="container col-10" id="sidepanel">
             <ul class="vnav">
                 <li>BASIC</li>
-                <li><a href="/dashboard">Dashboard</a></li>
-                <li><a href="/">Jobs</a> <span class="count">2</span></li>
-                <li><a href="#">Documents</a></li>
+                <li><a href="{{ url('/dashboard') }}">Dashboard</a></li>
+                <li><a href="{{ url('/') }}">Jobs</a> <span class="count">{{ \App\Job::openJobCount() }}</span></li>
+                <li>OPEN JOBS</li>
+
+                @foreach($statuses as $status)
+                @if($status->id < 999)
+                <li><a href="{{ url('/jobs/status/' . $status->id) }}">{{ substr($status->name, 0, 15) }}</a> <span class="count {{ \App\Status::getHtmlClass($status->id) }}">{{ \App\Status::openJobCount($status->id) }}</a></li>
+                @endif
+                @endforeach
+
                 <li>ADMINISTRATION</li>
                 <li><a href="/users">Users</a></li>
                 <li><a href="/settings">Settings</a></li>

@@ -6,7 +6,7 @@
 
 @section('content')
 <div class="container floating-box-95 no-top-pad">
-    <form action="/add" method="post">
+    <form action="{{ url('add') }}" method="post">
     <input type="hidden" name="_token" value="{!! csrf_token() !!}">
     <p>
         <label>Workorder</label>
@@ -23,20 +23,19 @@
     <p>
         <label>Status</label>
         <select class="medium-input" name="status">
-            <option>In Progress</option>
-            <option>Parts Ordered</option>
-            <option>Waiting on Callback</option>
-            <option>Waiting on Pickup</option>
+            @foreach($statuses as $status)
+            <option value="{{ $status->id }}">{{ $status->name }}</option>
+            @endforeach
         </select>
     </p>
-    <p>
+    <!--<p>
         <label>Store</label>
         <select class="medium-input" name="store">
             <option>Store #001</option>
             <option>Store #002</option>
             <option>Store #003</option>
         </select>
-    </p>
+    </p>-->
     <p>
         <label>Device</label>
         <input class="medium-input" type="text" name="device" placeholder="ABCDEF0123456789" />

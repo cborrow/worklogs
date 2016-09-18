@@ -124,14 +124,14 @@ ul li {
 }
 #sidepanel {
     background: #2c3e50;
-    color: #eee;
+    color: #abc;
     height: 100%;
 }
 #sidepanel a {
-    color: #eee;
+    color: #fff;
     text-decoration: none;
     font-size: 12pt;
-    font-weight: normal;
+    font-weight: 100;
 }
 #sidepanel ul li {
     list-style: none;
@@ -139,7 +139,7 @@ ul li {
     border-top: #34495e solid 1px;
     font-size: 10pt;
     font-weight: 600;
-    color: #abc;
+    color: #54697e;
 }
 #sidepanel ul li ul {
     background: #34495e;
@@ -179,6 +179,12 @@ h4.title {
 }
 .large-numbers {
     font-size: 20pt;
+}
+
+.pagination {
+    float: left;
+    width: 100%;
+    text-align: center;
 }
 
 .semi-bold {
@@ -289,9 +295,10 @@ h4.title {
 
 .status {
     background: #95a5a6;
-    padding: 2px 5px;
-    border-radius: 5px;
-    font-weight: 600;
+    padding: 1px 5px;
+    border-radius: 15px;
+    /*font-weight: 600;*/
+    font-size: 12pt;
 }
 .status a {
     text-decoration: none;
@@ -303,8 +310,9 @@ h4.title {
 .waiting-callback { background: #f1c40f; }
 .parts-ordered { background: #9b59b6; }
 .closed { background: #ecf0f1; }
-.test { background: #9b59b6; }
+.test { background: #9b59b6 !important; }
 .test a { color: #eee; }
+.test-2 { background: #27ae60 !important; color: #eee; }
 
 .popup-overlay {
     display: none;

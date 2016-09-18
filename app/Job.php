@@ -33,4 +33,18 @@ class Job extends Model
     public static function recentlyUpdated($count) {
         return Job::orderBy('updated_at')->take($count)->get();
     }
+
+    public static function getTimeOpen($id) {
+        $job = Job::find($id);
+        $now = date_create();
+        $created = date_create($job->created_at);
+        $diff = date_diff($now, $created);
+
+        return $diff->d . " days " . $diff->h . " hours " . $diff->i . " minutes";
+    }
+
+    public static function openJobCount() {
+        $count = Job::where('status_id', '<', '999')->count();
+        return $count;
+    }
 }

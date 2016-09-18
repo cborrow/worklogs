@@ -12,22 +12,57 @@ use App\Http\Requests;
 class JobsController extends Controller
 {
     public function index() {
-        $jobs = Job::all();
-        return view('notes.index', compact('jobs'));
+        $count = Job::count();
+        $statuses = Status::all();
+
+        $jobsPerPage = 15;
+        $totalPages = 0;
+        $page = 0;
+
+        if($count > $jobsPerPage) {
+            $page = 1;
+            $totalPages = ceil(($count / $jobsPerPage));
+            $jobs = Job::skip((($page - 1) * $jobsPerPage))->take($jobsPerPage)->get();
+        }
+        else
+            $jobs = Job::all();
+        return view('notes.index', compact('jobs', 'page', 'totalPages', 'statuses'));
     }
 
     public function add() {
-        return view('notes.add');
+        $statuses = Status::all();
+        return view('notes.add', compact('statuses'));
     }
 
     public function edit(Job $job) {
-        return view('notes.edit', compact('job'));
+        $statuses = Status::all();
+        return view('notes.edit', compact('job', 'statuses'));
     }
 
     public function dashboard() {
         $jobs = Job::all();
         $stores = Store::all();
-        return view('notes.dashboard', compact('jobs', 'stores'));
+        $statuses = Status::all();
+        return view('notes.dashboard', compact('jobs', 'stores', 'statuses'));
+    }
+
+    public function jobsByStatus(Status $status) {
+        //$id = Status::where('name', $status)->first()->id;
+        $jobs = Job::where('status_id', $status->id)->get();
+        $statuses = Status::all();
+
+        return view('notes.status', compact('jobs', 'status', 'statuses'));
+    }
+
+    public function jobsByPage($page) {
+        $jobsPerPage = 15;
+        $jobs = Job::skip((($page - 1) * $jobsPerPage))->take($jobsPerPage)->get();
+        $statuses = Status::all();
+
+        $count = Job::count();
+        $totalPages = ceil(($count / $jobsPerPage));
+
+        return view('notes.index', compact('jobs', 'page', 'totalPages', 'statuses'));
     }
 
     public function store(Request $request) {
@@ -38,7 +73,7 @@ class JobsController extends Controller
         ]);
 
         $job = new Job;
-        $job->status_id = 1;
+        $job->status_id = $request->status;
         $job->store_id = 1;
         $job->user_id = 1;
         $job->workorder = $request->workorder;
@@ -51,7 +86,7 @@ class JobsController extends Controller
         $job->notes = $request->notes;
         $job->save();
 
-        return back();
+        return redirect('/');
     }
 
     public function update(Request $request, Job $job) {

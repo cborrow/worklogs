@@ -10,6 +10,11 @@ class Status extends Model
         $this->hasMany(Job::class);
     }
 
+    public static function openJobCount($id) {
+        $count = Job::where('status_id', $id)->count();
+        return $count;
+    }
+
     public static function getColor($id) {
         $status = Status::find($id);
 
@@ -24,5 +29,17 @@ class Status extends Model
         if($status != null)
             return $status->name;
         return "Unknown status";
+    }
+
+    public static function getHtmlClass($id) {
+        $status = Status::find($id);
+
+        if($status != null) {
+            $name = $status->name;
+            $name = strtolower($name);
+            $name = str_replace(' ', '-', $name);
+            return $name;
+        }
+        return "normal-status";
     }
 }

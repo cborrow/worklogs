@@ -1,5 +1,22 @@
 var baseURI = 'http://localhost/worklogs/public/index.php/';
 
+$(document).ready(registerEvents);
+
+function registerEvents() {
+    $('#job_filter').change(filterJobs);
+}
+
+function filterJobs() {
+    var str = $("#job_filter").val();
+
+    if(str == 'All') {
+        location.href = baseURI;
+    }
+    else {
+        location.href = baseURI + 'jobs/status/' + str;
+    }
+}
+
 function showOverlay() {
     var popup = $('.popup-overlay');
     popup.css('display', 'block');

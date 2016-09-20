@@ -21,14 +21,24 @@ Route::get('/settings', 'SettingsController@index');
 
 Route::post('/add', 'JobsController@store');
 Route::post('/edit/{job}', 'JobsController@update');
-Route::post('/delete', 'JobsController@purge');
+Route::post('/delete/{job}', 'JobsController@purge');
+
+Route::get('/search', 'JobsController@search');
+//Route::match(array('GET', 'POST'), '/search', 'JobsController@search');
 
 Route::get('/jobs/status/{status}', 'JobsController@jobsByStatus');
+Route::get('/jobs/status/{status}/{page}', 'JobsController@jobsByStatus');
 Route::get('/jobs/page/{page}', 'JobsController@jobsByPage');
+
 
 Route::get('/api/getjobstatus/{job}', 'JobsController@apigetstatus');
 Route::get('/api/getstatuslist', 'JobsController@getstatuslist');
 Route::post('/api/setjobstatus/{job}', 'JobsController@setjobstatus');
+Route::post('/api/closejob/{job}', 'JobsController@closejob');
+
+Route::post('/api/setstatuscolor/{status}', 'SettingsController@setstatuscolor');
+Route::post('/api/setstatusname/{status}', 'SettingsController@setstatusname');
+Route::post('/api/addstatus', 'SettingsController@addstatusname');
 
 Route::post('/stores/store', 'SettingsController@addstore');
 Route::post('/stores/delete/{store}', 'SettingsController@deletestore');

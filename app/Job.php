@@ -7,6 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Job extends Model
 {
+    public static function getOpenJobs() {
+        $jobs = Job::where('status_id', '>', '1')->get();
+        return $jobs;
+    }
+    
     public static function getStatusName($status_id) {
         $status = Status::find($status_id);
 
@@ -44,7 +49,7 @@ class Job extends Model
     }
 
     public static function openJobCount() {
-        $count = Job::where('status_id', '<', '999')->count();
+        $count = Job::where('status_id', '>', '1')->count();
         return $count;
     }
 }

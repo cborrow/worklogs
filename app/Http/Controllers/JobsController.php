@@ -22,10 +22,11 @@ class JobsController extends Controller
         if($count > $jobsPerPage) {
             $page = 1;
             $totalPages = ceil(($count / $jobsPerPage));
-            $jobs = Job::skip((($page - 1) * $jobsPerPage))->take($jobsPerPage)->get();
+            $jobs = Job::where('status_id', '>', '1')
+                    ->skip((($page - 1) * $jobsPerPage))->take($jobsPerPage)->get();
         }
         else
-            $jobs = Job::all();
+            $jobs = Job::where('status_id', '>', '1')->get();
         return view('notes.index', compact('jobs', 'page', 'totalPages', 'statuses'));
     }
 
@@ -46,12 +47,20 @@ class JobsController extends Controller
         return view('notes.dashboard', compact('jobs', 'stores', 'statuses'));
     }
 
-    public function jobsByStatus(Status $status) {
-        //$id = Status::where('name', $status)->first()->id;
-        $jobs = Job::where('status_id', $status->id)->get();
+    public function jobsByStatus(Status $status, $page = 0) {
+        $count = Job::count();
+        $jobsPerPage = 15;
+        $totalPages = 0;
+
+        if($count > $jobsPerPage) {
+            $jobs = Job::where('status_id', $status->id)->skip($page - 1)->take($jobsPerPage)->get();
+        }
+        else
+            $jobs = Job::where('status_id', $status->id)->get();
         $statuses = Status::all();
 
-        return view('notes.status', compact('jobs', 'status', 'statuses'));
+        return view('notes.status',
+               compact('jobsPerPage', 'totalPages', 'page', 'jobs', 'status', 'statuses'));
     }
 
     public function jobsByPage($page) {
@@ -63,6 +72,11 @@ class JobsController extends Controller
         $totalPages = ceil(($count / $jobsPerPage));
 
         return view('notes.index', compact('jobs', 'page', 'totalPages', 'statuses'));
+    }
+
+    public function search(Request $request) {
+        $jobs = Job::where('customer', 'like', '%' . $request->input('query') . '%')->get();
+        return view('search.index', compact('jobs'));
     }
 
     public function store(Request $request) {
@@ -99,6 +113,7 @@ class JobsController extends Controller
         $job->workorder = $request->workorder;
         $job->customer = $request->customer;
         $job->phone = $request->phone;
+        $job->status_id = $request->status;
         $job->device = $request->device;
         $job->password = $request->password;
         $job->has_power_adapter = ($request->power_adapter == 'on') ? 1 : 0;
@@ -108,6 +123,14 @@ class JobsController extends Controller
 
         return back();
     }
+
+    public function purge(Request $request, Job $job) {
+        if($request->reallydelete == 'yes') {
+            $job->delete();
+        }
+    }
+
+    /*API functions for jobs*/
 
     public function getJobStatus(Request $request, Job $job) {
         $status = Job::getStatusName($job->status_id);
@@ -131,5 +154,10 @@ class JobsController extends Controller
     public function apiGetStatus(Request $request, Job $job) {
         $status = $this->getJobStatus($request, $job);
         echo $status;
+    }
+
+    public function closeJob(Request $request, Job $job) {
+        $job->status_id = 1;
+        $job->save();
     }
 }

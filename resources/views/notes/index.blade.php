@@ -6,9 +6,9 @@
 <span class="right semi-bold">
     <label>Filter Jobs</lable>
     <select id="job_filter" name="job_filter">
-        <option>All</option>
+        <option value='0'>All</option>
         @foreach(\App\Status::all() as $status)
-            <option>{{ $status->name }}</option>
+            <option value="{{ $status->id }}">{{ $status->name }}</option>
         @endforeach
     </select>
 </span>
@@ -27,7 +27,7 @@
         </thead>
         <tbody>
             @foreach ($jobs as $job)
-            <tr>
+            <tr rel="{{ $job->id }}">
                 <td>{{ $job->workorder }}</td>
                 <td>{{ $job->customer }}</td>
                 <td><span class="status" style="background: {{ \App\Job::getStatusColor($job->status_id) }}; border: {{ \App\Job::getStatusColor($job->status_id) }} solid 1px;">
@@ -39,8 +39,9 @@
                 <td><span class="rounded-button">
                     <a href="javascript:showPassword('{{ $job->password }}');" title="Show Password"><i class="fa fa-key" aria-hidden="true"></i></a>
                     <a href="{{ url('/edit/' . $job->id) }}" title="Edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                    <a href="{{ url('/delete/' . $job->id) }}" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
-                    <a href="{{ url('/close/' . $job->id) }}" title="Close"><i class="fa fa-check-square-o" aria-hidden="true"></i></a>
+                    <!--<a href="{{ url('/delete/' . $job->id) }}" title="Delete" rel="{{ $job->id }}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>-->
+                    <a href="#" title="Delete" rel="{{ $job->id }}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                    <a href="#" title="Close" rel="{{ $job->id }}"><i class="fa fa-check-square-o" aria-hidden="true"></i></a>
                 </span></td>
             </tr>
             @endforeach

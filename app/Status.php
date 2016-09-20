@@ -38,6 +38,7 @@ class Status extends Model
             $name = $status->name;
             $name = strtolower($name);
             $name = str_replace(' ', '-', $name);
+            $name = str_replace(array(',', '.', '"', '\''), '', $name);
             return $name;
         }
         return "normal-status";

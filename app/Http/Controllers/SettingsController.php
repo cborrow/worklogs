@@ -41,4 +41,33 @@ class SettingsController extends Controller
     public function deletestatus(Request $request, Status $status) {
         return back();
     }
+
+    public function setStatusColor(Request $request, Status $status) {
+        if(isset($request->color)) {
+            $status->color = $request->color;
+            $status->save();
+        }
+        return $status->color;
+    }
+
+    public function setStatusName(Request $request, Status $status) {
+        if(isset($request->name)) {
+            $status->name = $request->name;
+            $status->save();
+        }
+        return $status->name;
+    }
+
+    public function addStatusName(Request $request) {
+        if(isset($request->name) && isset($request->color)) {
+            $status = new Status;
+            $status->name = $request->name;
+            $status->color = $request->color;
+            $status->save();
+
+            return $status->id;
+        }
+
+        return 0;
+    }
 }

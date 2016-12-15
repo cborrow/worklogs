@@ -27,7 +27,7 @@ class CreateJobsTable extends Migration
             $table->boolean('has_display')->default('false');
             $table->boolean('has_system_discs')->default('false');
             $table->boolean('has_router')->default('false');
-            $table->boolean('wireless_adapter')->default('false');
+            $table->boolean('has_wireless_adapter')->default('false');
             $table->string('workorder');
             $table->string('customer');
             $table->string('phone');

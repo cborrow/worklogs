@@ -59,15 +59,15 @@
         <label>Comes with</label>
         <span class="checkbox_item"><input type="checkbox" name="power_adapter" {{ ($job->has_power_adapter) ? 'checked' : '' }} /> Power Adapter</span>
         <span class="checkbox_item"><input type="checkbox" name="carrying_case" {{ ($job->has_carrying_case) ? 'checked' : '' }} /> Carrying Case</span>
-        <span class="checkbox_item"><input type="checkbox" name="mouse" {{ ($job->mouse) ? 'checked' : '' }} /> Mouse</span>
-        <span class="checkbox_item"><input type="checkbox" name="keyboard" {{ ($job->keyboard) ? 'checked' : '' }} /> Keyboard</span>
-        <span class="checkbox_item"><input type="checkbox" name="external_hdd" {{ ($job->external_hdd) ? 'checked' : '' }} /> External HDD</span>
-        <span class="checkbox_item"><input type="checkbox" name="flash_drive" {{ ($job->flash_drive) ? 'checked' : '' }} /> Flash Drive</span>
-        <span class="checkbox_item"><input type="checkbox" name="printer" {{ ($job->printer) ? 'checked' : '' }} /> Printer</span>
-        <span class="checkbox_item"><input type="checkbox" name="display" {{ ($job->display) ? 'checked' : '' }} /> Display / Monitor</span>
-        <span class="checkbox_item"><input type="checkbox" name="system_discs" {{ ($job->system_discs) ? 'checked' : '' }} /> System Discs</span>
-        <span class="checkbox_item"><input type="checkbox" name="router" {{ ($job->router) ? 'checked' : '' }} /> Router / Switch</span>
-        <span class="checkbox_item"><input type="checkbox" name="wireless_adapter" {{ ($job->wireless_adapter) ? 'checked' : '' }} /> Wireless Adapter</span>
+        <span class="checkbox_item"><input type="checkbox" name="mouse" {{ ($job->has_mouse) ? 'checked' : '' }} /> Mouse</span>
+        <span class="checkbox_item"><input type="checkbox" name="keyboard" {{ ($job->has_keyboard) ? 'checked' : '' }} /> Keyboard</span>
+        <span class="checkbox_item"><input type="checkbox" name="external_hdd" {{ ($job->has_external_hdd) ? 'checked' : '' }} /> External HDD</span>
+        <span class="checkbox_item"><input type="checkbox" name="flash_drive" {{ ($job->has_flash_drive) ? 'checked' : '' }} /> Flash Drive</span>
+        <span class="checkbox_item"><input type="checkbox" name="printer" {{ ($job->has_printer) ? 'checked' : '' }} /> Printer</span>
+        <span class="checkbox_item"><input type="checkbox" name="display" {{ ($job->has_display) ? 'checked' : '' }} /> Display / Monitor</span>
+        <span class="checkbox_item"><input type="checkbox" name="system_discs" {{ ($job->has_system_discs) ? 'checked' : '' }} /> System Discs</span>
+        <span class="checkbox_item"><input type="checkbox" name="router" {{ ($job->has_router) ? 'checked' : '' }} /> Router / Switch</span>
+        <span class="checkbox_item"><input type="checkbox" name="wireless_adapter" {{ ($job->has_wireless_adapter) ? 'checked' : '' }} /> Wireless Adapter</span>
     </p>
     <p>
         <label>Notes</label>

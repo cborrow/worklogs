@@ -6,3 +6,5 @@ Homestead.json
 .env
 /.htaccess
 /.env
+/public/index.php
+/config/app.php

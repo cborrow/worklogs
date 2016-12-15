@@ -58,12 +58,14 @@ select, option, input[type=text], input[type=password], textarea, input[type=che
     padding: 5px;
     font-family: "Open Sans", Sans-Serif;
     font-size: 11pt;
-    border: #ccc solid 1px;
+    border: #ddd solid 1px;
+    border-radius: 5px;
 }
 
 form select, input, textarea {
     font-family: "Open Sans", Sans-Serif;
     font-size: 11pt;
+    border-radius: 5px;
 }
 .small-input {
     width: 200px;

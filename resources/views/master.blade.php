@@ -4,18 +4,19 @@
     <title>Notes</title>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" media="screen" href="{{ asset('/css/main.css') }}" />
+    <link rel="stylesheet" href="{{ asset('/css/trumbowyg.min.css') }}" />
     <script src="https://use.fontawesome.com/c584962945.js"></script>
     <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>
     <script src="{{ asset('/js/main.js') }}"></script>
     <meta name="csrf-token" content="{{ csrf_token() }}" />
-    <!--<style type="text/css">
-    /*Dymanically generated CSS*/
-    @foreach(\App\Status::all() as $status)
-    .{{ \App\Status::getHtmlClass($status->id) }} {
-        background-color: {{ $status->color }} !important;
+    <style type="text/css">
+    .trumbowyg{
+        float: left;
+        width: 660px;
+        margin-top: -1px;
+        margin-left: 1px;
     }
-    @endforeach
-    </style>-->
+    </style>
 </head>
 <body>
     <div class="container col-100">
@@ -63,4 +64,9 @@
     </div>
 </body>
 <script type="text/javascript" src="{{ asset('js/idle.js') }}"></script>
+<script src="{{ asset('/js/trumbowyg.min.js') }}"></script>
+<script type="text/javascript">
+    $.trumbowyg.svgPath = "{{ asset('/images/icons.svg') }}";
+    $("textarea").trumbowyg();
+</script>
 </html>

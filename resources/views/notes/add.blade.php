@@ -55,7 +55,7 @@
     </p>
     <p>
         <label>Notes</label>
-        <textarea class="large-input" name="notes"></textarea>
+        <textarea class="large-input" name="notes" placeholder="Job notes"></textarea>
     </p>
     <p class="buttons-wide">
         <input class="button normal" type="submit" name="submit" value="Save" />

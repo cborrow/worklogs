@@ -48,10 +48,19 @@
         <label>Password</label>
         <input class="medium-input" type="text" name="password" placeholder="Password123" />
     </p>
-    <p>
+    <p class="checkbox_block">
         <label>Comes with</label>
-        <input type="checkbox" name="power_adapter" /> Power adapter
-        <input type="checkbox" name="carrying_case" /> Carrying case
+        <span class="checkbox_item"><input type="checkbox" name="power_adapter" /> Power adapter</span>
+        <span class="checkbox_item"><input type="checkbox" name="carrying_case" /> Carrying case</span>
+        <span class="checkbox_item"><input type="checkbox" name="mouse" /> Mouse</span>
+        <span class="checkbox_item"><input type="checkbox" name="keyboard" /> Keyboard</span>
+        <span class="checkbox_item"><input type="checkbox" name="external_hdd" /> External HDD</span>
+        <span class="checkbox_item"><input type="checkbox" name="flash_drive" /> Flash drive</span>
+        <span class="checkbox_item"><input type="checkbox" name="printer" /> Printer</span>
+        <span class="checkbox_item"><input type="checkbox" name="display" /> Display / Monitor</span>
+        <span class="checkbox_item"><input type="checkbox" name="system_discs" /> System discs</span>
+        <span class="checkbox_item"><input type="checkbox" name="router" /> Router / switch</span>
+        <span class="checkbox_item"><input type="checkbox" name="wireless_adapter" /> Wireless adapter</span>
     </p>
     <p>
         <label>Notes</label>

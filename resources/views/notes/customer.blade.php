@@ -10,7 +10,7 @@
         <thead>
             <td>Workorder</td>
             <td>Status</td>
-            <td>Notes</td>
+            <td>Created</td>
             <td>Last Update</td>
             <td>Time Open</td>
             <td class="col-10"></td>
@@ -22,9 +22,8 @@
                 <td><span class="status" style="background: {{ \App\Job::getStatusColor($job->status_id) }}; border: {{ \App\Job::getStatusColor($job->status_id) }} solid 1px;">
                     <a href="javascript:changeJobStatus('{{ $job->id }}');">{{ \App\Job::getStatusName($job->status_id) }}</a>
                 </span></td>
-				<td>{{ substr($job->notes, 0, 50) }}
+				<td>{{ $job->created_at }}
                 <td>{{ $job->updated_at }}</td>
-                <!--<td>Unspecified time</td>-->
                 <td>{{ \App\Job::getTimeOpen($job->id) }}
                 <td><span class="rounded-button">
                     <a href="javascript:showPassword('{{ $job->password }}');" title="Show Password"><i class="fa fa-key" aria-hidden="true"></i></a>

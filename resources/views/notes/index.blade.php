@@ -21,6 +21,7 @@
             <td>Workorder</td>
             <td>Customer</td>
             <td>Status</td>
+            <td>Created</td>
             <td>Last Update</td>
             <td>Time Open</td>
             <td class="col-10"></td>
@@ -37,6 +38,7 @@
                 <td><span class="status" style="background: {{ \App\Job::getStatusColor($job->status_id) }};">
                     <a href="javascript:changeJobStatus('{{ $job->id }}');">{{ \App\Job::getStatusName($job->status_id) }}</a>
                 </span></td>
+                <td>{{ $job->created_at }}</td>
                 <td>{{ $job->updated_at }}</td>
                 <!--<td>Unspecified time</td>-->
                 <td>{{ \App\Job::getTimeOpen($job->id) }}

@@ -40,7 +40,6 @@
                 </span></td>
                 <td>{{ $job->created_at }}</td>
                 <td>{{ $job->updated_at }}</td>
-                <!--<td>Unspecified time</td>-->
                 <td>{{ \App\Job::getTimeOpen($job->id) }}
                 <td><span class="rounded-button">
                     <a href="javascript:showPassword('{{ $job->password }}');" title="Show Password"><i class="fa fa-key" aria-hidden="true"></i></a>
